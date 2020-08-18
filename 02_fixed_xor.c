@@ -1,8 +1,7 @@
-#include <stdio.h>
-#include "header.h"
+#include "cryptopals.h"
 
 
-unsigned char	*xoring(unsigned char *hex0, unsigned char *hex1)
+unsigned char	*xoring(const char *hex0, const char *hex1)
 {
 	unsigned char *result;
 	unsigned char *iter;
@@ -20,11 +19,4 @@ unsigned char	*xoring(unsigned char *hex0, unsigned char *hex1)
 	}
 	*iter = 0;
 	return (result);
-}
-
-
-int main(int argc, unsigned char **argv)
-{
-	if (argc > 2)
-		printf("%s", xoring(argv[1], argv[2]));
 }

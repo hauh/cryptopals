@@ -1,10 +1,9 @@
-#include <stdio.h>
-#include "header.h"
+#include "cryptopals.h"
 
 const char base64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
 
-char	*hex_to_base64(unsigned char *hex)
+unsigned char	*hex_to_base64(const char *hex)
 {
 	unsigned char	*encoded;
 	unsigned char	*result;
@@ -40,11 +39,4 @@ char	*hex_to_base64(unsigned char *hex)
 	*encoded = 0;
 
 	return (result);
-}
-
-
-int		main(int argc, unsigned char **argv)
-{
-	for (int i = 1; i < argc; ++i)
-		printf("%s", hex_to_base64(argv[i]));
 }

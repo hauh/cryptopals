@@ -1,23 +1,22 @@
-#include <stdio.h>
-#include "header.h"
+#include "cryptopals.h"
 
 const char	*letters = "etaoinshrdlu";
 
 
-unsigned char	*decrypt(unsigned char *hex)
+unsigned char	*decrypt_single_byte(const char *hex)
 {
 	unsigned char	*iter;
 	unsigned char	*result;
-	float			frequency_score;
-	float			best_score = 0.0;
-	int				key;
+	double			frequency_score;
+	double			best_score = 0.0;
+	int				key = 0;
 	int				i;
 	unsigned char	decrypted;
 
 	for (int check = 0; check < 256; ++check)
 	{
 		frequency_score = 0.0;
-		iter = hex;
+		iter = (unsigned char *)hex;
 		while (*iter)
 		{
 			decrypted = (HEX_TO_BIN(*iter) << 4 | HEX_TO_BIN(*(iter + 1))) ^ check;
@@ -47,11 +46,4 @@ unsigned char	*decrypt(unsigned char *hex)
 	*iter = 0;
 
 	return (result);
-}
-
-
-int				main(int argc, unsigned char **argv)
-{
-	if (argc > 1)
-		printf("%s", decrypt(argv[1]));
 }
