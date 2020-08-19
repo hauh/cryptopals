@@ -1,6 +1,6 @@
 #include "cryptopals.h"
 
-const char	*letters = "etaoinshrdlu";
+const char g_frequent_letters[] = "etaoinshrdlu";
 
 
 unsigned char	*decrypt_single_byte(const char *hex)
@@ -13,7 +13,7 @@ unsigned char	*decrypt_single_byte(const char *hex)
 	int				i;
 	unsigned char	decrypted;
 
-	for (int check = 0; check < 256; ++check)
+	for (int check = 0; check <= 0xff; ++check)
 	{
 		frequency_score = 0.0;
 		iter = (unsigned char *)hex;
@@ -21,10 +21,10 @@ unsigned char	*decrypt_single_byte(const char *hex)
 		{
 			decrypted = (HEX_TO_BIN(*iter) << 4 | HEX_TO_BIN(*(iter + 1))) ^ check;
 			i = 0;
-			while (letters[i])
+			while (g_frequent_letters[i])
 			{
-				if (letters[i] == decrypted)
-					frequency_score += 1.0 - 0.05 * i;
+				if (g_frequent_letters[i] == decrypted)
+					frequency_score += FREQUENCY_SCORE(i);
 				++i;
 			}
 			iter += 2;
@@ -44,6 +44,5 @@ unsigned char	*decrypt_single_byte(const char *hex)
 		hex += 2;
 	}
 	*iter = 0;
-
 	return (result);
 }
