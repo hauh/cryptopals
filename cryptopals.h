@@ -5,8 +5,9 @@
 # include <fcntl.h>
 # include <assert.h>
 
-# define HEX_TO_BIN(hex)		((hex & 0xf) + (hex > '9' ? 9 : 0))
-# define FREQUENCY_SCORE(index)	(1.0 - 0.05 * index)
+# define HEX_TO_BIN(hex)		(((hex) & 0xf) + ((hex) > '9' ? 9 : 0))
+# define BIN_TO_HEX(bin)		((bin) + ((bin) < 10 ? '0' : 'a' - 10))
+# define FREQUENCY_SCORE(index)	(1.0 - 0.05 * (index))
 
 extern const char	g_frequent_letters[];
 
@@ -14,5 +15,7 @@ unsigned char	*hex_to_base64(const char *hex);
 unsigned char	*xoring(const char *hex0, const char *hex1);
 unsigned char	*decrypt_single_byte(const char *hex);
 unsigned char	*decrypt_lines(const char *filename);
+unsigned char	*encrypt_repeating_xoring(const char *string, const char *key);
+
 
 #endif
