@@ -13,7 +13,7 @@ unsigned char	*xoring(const char *hex0, const char *hex1)
 	while (*hex0)
 	{
 		xor = HEX_TO_BIN(*hex0) ^ HEX_TO_BIN(*hex1);
-		*iter++ = xor + (xor < 10 ? '0' : 'a' - 10);
+		*iter++ = BIN_TO_HEX(xor);
 		++hex0;
 		++hex1;
 	}
